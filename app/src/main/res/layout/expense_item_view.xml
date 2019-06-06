@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="4dp">
+    
+    <TextView
+        android:id="@+id/view_expense_number"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:text="Number"
+        android:textAlignment="center"
+        android:paddingTop="15dp"
+        android:textSize="24dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/view_expense_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_expense_name"
+        android:textSize="24dp"
+        android:layout_toRightOf="@+id/view_expense_number"
+        android:layout_marginLeft="10dp"/>
+    <TextView
+        android:id="@+id/view_expense_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_expense_entry_date"
+        android:textSize="18dp"
+        android:layout_toRightOf="@+id/view_expense_number"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"/>
+
+</RelativeLayout>

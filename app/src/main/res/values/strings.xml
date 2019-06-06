@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">MyExpense</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="register">Register</string>
+    <string name="btn_register">Register</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="not_registered">Not registered yet?</string>
+    <string name="registered">Already registered?</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="add_expense">Add expense</string>
+    <string name="add_income">Add income</string>
+    <string name="add_expense_name">Expense name</string>
+    <string name="add_expense_type">Expense type</string>
+    <string name="add_expense_amount">Expense amount</string>
+    <string name="add_expense_entry_date">Entry date</string>
+    <string name="add_income_name">Income name</string>
+    <string name="add_income_type">Income type</string>
+    <string name="add_income_amount">Income amount</string>
+    <string name="add_income_entry_date">Entry date</string>
+    <string name="btn_add">Add</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_show">Show</string>
+    <string name="empty_expense">You have no entered expenses!</string>
+    <string name="empty_income">You have no entered income!</string>
+    <string name="expense_dialog_message">Are you sure you want to delete this expense?</string>
+    <string name="income_dialog_message">Are you sure you want to delete this income?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="expense_delete_text">Expense successfully deleted!</string>
+    <string name="income_delete_text">Income successfully deleted!</string>
+
+    <string-array name="expense_types">
+        <item>Hrana</item>
+        <item>Piće</item>
+        <item>Cigarete</item>
+        <item>Režije</item>
+        <item>Izlazak</item>
+        <item>Ostalo</item>
+    </string-array>
+
+    <string-array name="income_types">
+        <item>Džeparac</item>
+        <item>Stipendija</item>
+        <item>Plaća</item>
+        <item>Ostalo</item>
+    </string-array>
+
+    <string-array name="balance_for">
+        <item>Expense</item>
+        <item>Income</item>
+    </string-array>
+</resources>

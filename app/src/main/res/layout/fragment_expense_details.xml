@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/details_expense_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/add_expense_name"
+        android:textAlignment="center"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/details_expense_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="@string/add_expense_amount"
+        android:textAlignment="center"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/details_expense_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/add_expense_type"
+        android:textAlignment="center"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/details_expense_entry_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:text="@string/add_expense_entry_date"
+        android:textAlignment="center"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/details_expense_delete_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:text="@string/expense_delete_text"
+        android:textAlignment="center"
+        android:textSize="24dp" />
+
+    <Button
+        android:id="@+id/btn_expense_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/btn_delete" />
+
+
+</RelativeLayout>
