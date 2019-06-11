@@ -1,25 +1,25 @@
 <resources>
-    <string name="app_name">MyExpense</string>
-    <string name="login">Login</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="btn_login">Login</string>
-    <string name="register">Register</string>
-    <string name="btn_register">Register</string>
-    <string name="first_name">First name</string>
-    <string name="last_name">Last name</string>
-    <string name="email">Email</string>
-    <string name="not_registered">Not registered yet?</string>
-    <string name="registered">Already registered?</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="add_expense">Add expense</string>
-    <string name="add_income">Add income</string>
-    <string name="add_expense_name">Expense name</string>
-    <string name="add_expense_type">Expense type</string>
-    <string name="add_expense_amount">Expense amount</string>
-    <string name="add_expense_entry_date">Entry date</string>
-    <string name="add_income_name">Income name</string>
+    <string name="app_name" translatable="false">MyExpense</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="username" translatable="false">Username</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="btn_login" translatable="false">Login</string>
+    <string name="register" translatable="false">Register</string>
+    <string name="btn_register" translatable="false">Register</string>
+    <string name="first_name" translatable="false">First name</string>
+    <string name="last_name" translatable="false">Last name</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="not_registered" translatable="false">Not registered yet?</string>
+    <string name="registered" translatable="false">Already registered?</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="add_expense" translatable="false">Add expense</string>
+    <string name="add_income" translatable="false">Add income</string>
+    <string name="add_expense_name" translatable="false">Expense name</string>
+    <string name="add_expense_type" translatable="false">Expense type</string>
+    <string name="add_expense_amount" translatable="false">Expense amount</string>
+    <string name="add_expense_entry_date" translatable="false">Entry date</string>
+    <string name="add_income_name" translatable="false">Income name</string>
     <string name="add_income_type">Income type</string>
     <string name="add_income_amount">Income amount</string>
     <string name="add_income_entry_date">Entry date</string>
@@ -34,25 +34,42 @@
     <string name="no">No</string>
     <string name="expense_delete_text">Expense successfully deleted!</string>
     <string name="income_delete_text">Income successfully deleted!</string>
+    <string name="balance_month">Balance month</string>
+    <string name="balance_amount">Balance amount</string>
+    <string name="balance_details">Balance details</string>
 
     <string-array name="expense_types">
-        <item>Hrana</item>
-        <item>Piće</item>
-        <item>Cigarete</item>
-        <item>Režije</item>
-        <item>Izlazak</item>
-        <item>Ostalo</item>
+        <item>Food</item>
+        <item>Drinks</item>
+        <item>Cigarettes</item>
+        <item>Rent</item>
+        <item>Going out</item>
+        <item>Other</item>
     </string-array>
 
     <string-array name="income_types">
-        <item>Džeparac</item>
-        <item>Stipendija</item>
-        <item>Plaća</item>
-        <item>Ostalo</item>
+        <item>Pocket money</item>
+        <item>Schoolarship</item>
+        <item>Salary</item>
+        <item>Other</item>
     </string-array>
 
     <string-array name="balance_for">
         <item>Expense</item>
         <item>Income</item>
     </string-array>
+
+    <string name="month">Month</string>
+    <string name="month_january">January</string>
+    <string name="month_february">February</string>
+    <string name="month_march">March</string>
+    <string name="month_april">April</string>
+    <string name="month_may">May</string>
+    <string name="month_june">June</string>
+    <string name="month_july">July</string>
+    <string name="month_august">August</string>
+    <string name="month_september">September</string>
+    <string name="month_october">October</string>
+    <string name="month_november">November</string>
+    <string name="month_december">September</string>
 </resources>

@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name" translatable="false">MyExpense</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="username" translatable="false">Korisničko ime</string>
+    <string name="password" translatable="false">Lozinka</string>
+    <string name="btn_login" translatable="false">Login</string>
+    <string name="register" translatable="false">Registracija</string>
+    <string name="btn_register" translatable="false">Registriraj</string>
+    <string name="first_name" translatable="false">Ime</string>
+    <string name="last_name" translatable="false">Prezime</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="not_registered" translatable="false">Niste registrirani?</string>
+    <string name="registered" translatable="false">Već ste registrirani?</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="add_expense" translatable="false">Dodaj trošak</string>
+    <string name="add_income" translatable="false">Dodaj prihod</string>
+    <string name="add_expense_name" translatable="false">Naziv troška</string>
+    <string name="add_expense_type" translatable="false">Tip troška</string>
+    <string name="add_expense_amount" translatable="false">Iznos troška</string>
+    <string name="add_expense_entry_date" translatable="false">Datum unosa</string>
+    <string name="add_income_name" translatable="false">NAziv prihoda</string>
+    <string name="add_income_type">Tip prihoda</string>
+    <string name="add_income_amount">Iznos prihoda</string>
+    <string name="add_income_entry_date">Datum unosa</string>
+    <string name="btn_add">Dodaj</string>
+    <string name="btn_delete">Izbriši</string>
+    <string name="btn_show">Prikaži</string>
+    <string name="empty_expense">Nemate unesenih troškova!</string>
+    <string name="empty_income">Nemate unesenih prihoda!</string>
+    <string name="expense_dialog_message">Jeste li sigurni da želite izbrisati ovaj trošak?</string>
+    <string name="income_dialog_message">Jeste li sigurni da želite izbrisati ovaj prihod?</string>
+    <string name="yes">Da</string>
+    <string name="no">Ne</string>
+    <string name="expense_delete_text">Trošak uspješno izbrisan!</string>
+    <string name="income_delete_text">Prihod uspješno izbrisan!</string>
+    <string name="balance_month">Mjesec balansa</string>
+    <string name="balance_amount">Iznos balansa</string>
+    <string name="balance_details">Detalji o balansu</string>
+
+    <string-array name="expense_types">
+        <item>Hrana</item>
+        <item>Piće</item>
+        <item>Cigarete</item>
+        <item>Režije</item>
+        <item>Izlazak</item>
+        <item>Ostalo</item>
+    </string-array>
+
+    <string-array name="income_types">
+        <item>Džeparac</item>
+        <item>Stipendija</item>
+        <item>Plaća</item>
+        <item>Ostalo</item>
+    </string-array>
+
+    <string-array name="balance_for">
+        <item>Trošak</item>
+        <item>Prihod</item>
+    </string-array>
+
+    <string name="month">Mjesec</string>
+    <string name="month_january">Siječanj</string>
+    <string name="month_february">Veljača</string>
+    <string name="month_march">Ožujak</string>
+    <string name="month_april">Travanj</string>
+    <string name="month_may">Svibanj</string>
+    <string name="month_june">Lipanj</string>
+    <string name="month_july">Srpanj</string>
+    <string name="month_august">Kolovoz</string>
+    <string name="month_september">Rujan</string>
+    <string name="month_october">Listopad</string>
+    <string name="month_november">Studeni</string>
+    <string name="month_december">Prosinac</string>
+</resources>

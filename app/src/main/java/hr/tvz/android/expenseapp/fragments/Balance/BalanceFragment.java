@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +17,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -28,15 +30,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Path;
 
 public class BalanceFragment extends Fragment {
+
+    private RecyclerView balanceRecyclerView;
+    private BalanceAdapterRecView balanceAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
 
     private Spinner balanceTypeSpinner;
     private EditText yearOfEntry;
     private Button btnShow;
     private TextView balancePreviewText;
     private ArrayList<Balance> listOfBalances;
+    private boolean ok;
 
     @Nullable
     @Override
@@ -45,7 +52,7 @@ public class BalanceFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState){
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         balancePreviewText = getView().findViewById(R.id.balance_preview);
@@ -60,58 +67,159 @@ public class BalanceFragment extends Fragment {
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(balanceTypeSpinner.getSelectedItem().equals("Expense")){
+                if (balanceTypeSpinner.getSelectedItem().equals("Expense")) {
                     getExpensesPerMonth();
-                }
-                else{
+                } else {
                     getIncomesPerMonth();
                 }
             }
         });
     }
 
-    public void getExpensesPerMonth(){
+    public void getExpensesPerMonth() {
 
-        balancePreviewText.setText("");
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        ok = true;
+        if(yearOfEntry.getText().toString().isEmpty()){
+            yearOfEntry.setError("Enter year of entry!");
+            ok = false;
+        }
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/api/")
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        if(ok) {
+            balancePreviewText.setText("");
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-        JsonPlaceholderApi jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi.class);
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://10.0.2.2:8080/api/")
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
 
-        Call<ArrayList<Balance>>call = jsonPlaceholderApi.listByExpenseMonth(Integer.valueOf(yearOfEntry.getText().toString()));
+            JsonPlaceholderApi jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi.class);
 
-        call.enqueue(new Callback<ArrayList<Balance>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Balance>> call, Response<ArrayList<Balance>> response) {
-                if(!response.isSuccessful()){
-                    balancePreviewText.setText("Code: " + response.code());
-                    return;
+            Call<ArrayList<Balance>> call = jsonPlaceholderApi.listByExpenseMonth(Integer.valueOf(yearOfEntry.getText().toString()));
+
+            call.enqueue(new Callback<ArrayList<Balance>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Balance>> call, Response<ArrayList<Balance>> response) {
+                    if (!response.isSuccessful()) {
+                        balancePreviewText.setText("Code: " + response.code());
+                        return;
+                    }
+
+                    listOfBalances = response.body();
+
+                    if (listOfBalances.isEmpty()) {
+                        balancePreviewText.setText("No entry for that year!");
+                        return;
+                    }
+
+                    balanceRecyclerView = getView().findViewById(R.id.balance_recycler_view);
+                    balanceRecyclerView.setHasFixedSize(true);
+                    layoutManager = new LinearLayoutManager(getActivity());
+                    balanceAdapter = new BalanceAdapterRecView(listOfBalances);
+
+                    balanceRecyclerView.setLayoutManager(layoutManager);
+                    balanceRecyclerView.setAdapter(balanceAdapter);
+
+                    balanceAdapter.setOnItemClickListener(new BalanceAdapterRecView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            BalanceExpenseDetailsFragment balanceExpenseDetailsFragment = new BalanceExpenseDetailsFragment();
+                            Bundle bundle = new Bundle();
+
+                            bundle.putParcelable("balance", listOfBalances.get(position));
+                            bundle.putInt("year", Integer.valueOf(yearOfEntry.getText().toString()));
+                            balanceExpenseDetailsFragment.setArguments(bundle);
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                            fragmentTransaction.replace(R.id.fragment_container, balanceExpenseDetailsFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+                    });
                 }
 
-                listOfBalances = response.body();
-
-                for(Balance b : listOfBalances){
-                    String content = "";
-                    content += "Month: " + b.getMonth() + ". Amount: " + b.getSum() + " kn.\n";
-                    balancePreviewText.append(content);
+                @Override
+                public void onFailure(Call<ArrayList<Balance>> call, Throwable t) {
+                    balancePreviewText.setText(t.getMessage());
                 }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Balance>> call, Throwable t) {
-                balancePreviewText.setText(t.getMessage());
-            }
-        });
+            });
+        }
     }
 
-    public void getIncomesPerMonth(){
+    public void getIncomesPerMonth() {
+        ok = true;
+        if(yearOfEntry.getText().toString().isEmpty()){
+            yearOfEntry.setError("Enter year of entry!");
+            ok = false;
+        }
 
+        if(ok) {
+            balancePreviewText.setText("");
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://10.0.2.2:8080/api/")
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            JsonPlaceholderApi jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi.class);
+
+            Call<ArrayList<Balance>> call = jsonPlaceholderApi.listByIncomeMonth(Integer.valueOf(yearOfEntry.getText().toString()));
+
+            call.enqueue(new Callback<ArrayList<Balance>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Balance>> call, Response<ArrayList<Balance>> response) {
+                    if (!response.isSuccessful()) {
+                        balancePreviewText.setText("Code: " + response.code());
+                        return;
+                    }
+
+                    listOfBalances = response.body();
+
+                    if (listOfBalances.isEmpty()) {
+                        balancePreviewText.setText("No entry for that year!");
+                        return;
+                    }
+
+                    balanceRecyclerView = getView().findViewById(R.id.balance_recycler_view);
+                    balanceRecyclerView.setHasFixedSize(true);
+                    layoutManager = new LinearLayoutManager(getActivity());
+                    balanceAdapter = new BalanceAdapterRecView(listOfBalances);
+
+                    balanceRecyclerView.setLayoutManager(layoutManager);
+                    balanceRecyclerView.setAdapter(balanceAdapter);
+
+                    balanceAdapter.setOnItemClickListener(new BalanceAdapterRecView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            BalanceIncomeDetailsFragment balanceIncomeDetailsFragment = new BalanceIncomeDetailsFragment();
+                            Bundle bundle = new Bundle();
+
+                            bundle.putParcelable("balance", listOfBalances.get(position));
+                            bundle.putInt("year", Integer.valueOf(yearOfEntry.getText().toString()));
+                            balanceIncomeDetailsFragment.setArguments(bundle);
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                            fragmentTransaction.replace(R.id.fragment_container, balanceIncomeDetailsFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<Balance>> call, Throwable t) {
+                    balancePreviewText.setText(t.getMessage());
+                }
+            });
+        }
     }
 }

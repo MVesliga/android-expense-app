@@ -7,6 +7,7 @@ import java.util.List;
 import hr.tvz.android.expenseapp.model.Balance;
 import hr.tvz.android.expenseapp.model.Expense;
 import hr.tvz.android.expenseapp.model.Income;
+import hr.tvz.android.expenseapp.model.Type;
 import hr.tvz.android.expenseapp.model.User;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -33,6 +34,9 @@ public interface JsonPlaceholderApi {
     @DELETE("expenses/{expenseId}")
     Call<Void> deleteExpense(@Path("expenseId") Long expenseId);
 
+    @GET("expenses/balance/{yearOfEntry}")
+    Call<ArrayList<Balance>> listByExpenseMonth(@Path("yearOfEntry") int yearOfEntry);
+
     @GET("incomes/{userIdentifier}")
     Call<ArrayList<Income>> geTIncomes(@Path("userIdentifier") Long userIdentifier);
 
@@ -42,8 +46,16 @@ public interface JsonPlaceholderApi {
     @DELETE("incomes/{incomeId}")
     Call<Void> deleteIncome(@Path("incomeId") Long incomeId);
 
-    @GET("expenses/balance/{yearOfEntry}")
-    Call<ArrayList<Balance>> listByExpenseMonth(@Path("yearOfEntry") int yearOfEntry);
+    @GET("incomes/balance/{yearOfEntry}")
+    Call<ArrayList<Balance>> listByIncomeMonth(@Path("yearOfEntry") int yearOfEntry);
+
+    @GET("expenses/balance/{monthOfEntry}/{yearOfEntry}")
+    Call<ArrayList<Type>> listByExpenseType(@Path("monthOfEntry") int monthOfEntry, @Path("yearOfEntry") int yearOfEntry);
+
+    @GET("incomes/balance/{monthOfEntry}/{yearOfEntry}")
+    Call<ArrayList<Type>> listByIncomeType(@Path("monthOfEntry") int monthOfEntry, @Path("yearOfEntry") int yearOfEntry);
+
+
 
 
 }
